@@ -10,7 +10,9 @@ public class SpringTaskApplication {
         SpringApplication.run(SpringTaskApplication.class, args);
 
         System.out.println("my project is running...");
+
         System.out.println("project main");
+
 
     }
 
