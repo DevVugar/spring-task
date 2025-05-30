@@ -5,17 +5,22 @@ import com.example.springtask.model.dto.requset.ProductRequestDto;
 import com.example.springtask.model.dto.response.ProductResponseDto;
 import com.example.springtask.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/product")
-@RequiredArgsConstructor
+
 public class ProductController {
 
+//    @Autowired
     private final ProductService productService;
 
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
-   @PostMapping("/add")
+    @PostMapping("/add")
     public ProductResponseDto add(@RequestBody ProductRequestDto requestDto) {
         return productService.add(requestDto);
     }

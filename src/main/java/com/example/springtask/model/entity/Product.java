@@ -2,13 +2,15 @@ package com.example.springtask.model.entity;
 
 
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 @Setter
 @Getter
-@ToString
+//@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Component
 public class Product {
 
     private Long id;
