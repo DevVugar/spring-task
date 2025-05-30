@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @Builder
 @Component
+@EqualsAndHashCode
 public class Product {
 
     private Long id;

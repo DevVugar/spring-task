@@ -26,8 +26,12 @@ ApplicationContext context=new AnnotationConfigApplicationContext(ConfigurationC
         System.out.println("brand1"+brand1);
         System.out.println("brand2"+brand2);
 
+        System.out.println(brand1.equals(brand2));
+
         System.out.println("product"+product);
         System.out.println("product2"+product2);
+
+        System.out.println(product.equals(product2));
 
 
 
