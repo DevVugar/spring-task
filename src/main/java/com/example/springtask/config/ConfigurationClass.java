@@ -1,6 +1,6 @@
 package com.example.springtask.config;
 
-import com.example.springtask.model.entity.Brand;
+import com.example.springtask.model.entity.Category;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ public class ConfigurationClass {
 
     @Bean
     @Scope("prototype")
-    public Brand getBrand(){
-        return new Brand();
+    public Category getBrand(){
+        return new Category();
     }
 }

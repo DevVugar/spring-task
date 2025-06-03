@@ -6,14 +6,18 @@ import com.example.springtask.model.dto.response.ProductResponseDto;
 import com.example.springtask.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/v1/product")
 
 public class ProductController {
 
-//    @Autowired
+    //    @Autowired
     private final ProductService productService;
 
     public ProductController(ProductService productService) {
@@ -21,18 +25,24 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public ProductResponseDto add(@RequestBody ProductRequestDto requestDto) {
-        return productService.add(requestDto);
+    public ResponseEntity<ProductResponseDto> add(@RequestBody ProductRequestDto requestDto) {
+        return new ResponseEntity<>(productService.add(requestDto), HttpStatus.CREATED);
     }
 
     @GetMapping("/get/{id}")
-    ProductResponseDto getById(@PathVariable Long id) {
-        return productService.getById(id);
+    ResponseEntity<ProductResponseDto> getById(@PathVariable Long id) {
+        return new ResponseEntity<>(productService.getById(id), HttpStatus.OK);
+    }
+
+    @GetMapping()
+    ResponseEntity<List<ProductResponseDto>> getAll() {
+        return new ResponseEntity<(productService.getAll(), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/id")
-    void delete(@PathVariable Long id) {
+    ResponseEntity<Void> delete(@PathVariable Long id) {
         productService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 
