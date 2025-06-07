@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/v1/category")
 @RequiredArgsConstructor
 public class CategoryController {
 

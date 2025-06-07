@@ -13,4 +13,6 @@ public interface ProductService {
     ProductResponseDto getById(Long id);
 
     void delete(Long id);
+
+    ProductResponseDto getByName(String name);
 }

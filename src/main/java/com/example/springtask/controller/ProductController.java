@@ -14,19 +14,24 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/product")
-
 public class ProductController {
 
-    //    @Autowired
     private final ProductService productService;
 
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
+
+
     @PostMapping("/add")
     public ResponseEntity<ProductResponseDto> add(@RequestBody ProductRequestDto requestDto) {
         return new ResponseEntity<>(productService.add(requestDto), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/get-name")
+    ResponseEntity<ProductResponseDto> getByName(@RequestParam String name) {
+        return new ResponseEntity<>(productService.getByName(name), HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")
@@ -36,7 +41,7 @@ public class ProductController {
 
     @GetMapping()
     ResponseEntity<List<ProductResponseDto>> getAll() {
-        return new ResponseEntity<(productService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(productService.getAll(), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/id")
