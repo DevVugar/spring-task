@@ -1,6 +1,7 @@
 package com.example.springtask.model.entity;
 
 
+import com.example.springtask.enums.ProductStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.stereotype.Component;
@@ -22,22 +23,23 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(precision = 10, scale = 2)
-    private BigDecimal price;
+    @Enumerated(EnumType.STRING)
+    private ProductStatus productStatus;
+
+    private double price;
 
     private int stock;
+
+
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
 

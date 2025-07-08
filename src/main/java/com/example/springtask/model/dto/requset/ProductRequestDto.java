@@ -1,9 +1,11 @@
 package com.example.springtask.model.dto.requset;
 
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class ProductRequestDto {
     private Long id;
 
@@ -11,5 +13,5 @@ public class ProductRequestDto {
 
     private String description;
 
-    private double cost;
+    private double price;
 }

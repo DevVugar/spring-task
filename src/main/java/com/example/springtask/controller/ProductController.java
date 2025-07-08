@@ -25,6 +25,7 @@ public class ProductController {
 
 
     @PostMapping("/add")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ProductResponseDto> add(@RequestBody ProductRequestDto requestDto) {
         return new ResponseEntity<>(productService.add(requestDto), HttpStatus.CREATED);
     }
@@ -45,6 +46,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete/id")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     ResponseEntity<Void> delete(@PathVariable Long id) {
         productService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

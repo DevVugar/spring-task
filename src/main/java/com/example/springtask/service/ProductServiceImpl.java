@@ -1,72 +1,67 @@
 package com.example.springtask.service;
 
+import com.example.springtask.enums.ProductStatus;
+import com.example.springtask.mapper.ProductMapper;
 import com.example.springtask.model.dto.requset.ProductRequestDto;
 import com.example.springtask.model.dto.response.ProductResponseDto;
+import com.example.springtask.model.entity.Product;
+import com.example.springtask.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
+    private final ProductRepository productRepository;
+  //  private final ProductMapper productMapper;
+
+
+    private Product fetchProduct(Long id){
+        return productRepository.findById(id).orElseThrow(()->new RuntimeException("Product dont exist"));
+    }
 
     private final List<ProductResponseDto> list = new ArrayList<>();
 
     @Override
     public ProductResponseDto add(ProductRequestDto requestDto) {
-        log.info("add product");
+         Product product= ProductMapper.PRODUCT_MAPPER.toEntity(requestDto);
 
-        // Convert request to response
-        ProductResponseDto responseDto = new ProductResponseDto();
-        responseDto.setId(requestDto.getId());
-        responseDto.setName(requestDto.getName());
+        Product res= productRepository.save(product);
 
-
-        list.add(responseDto);
-        return responseDto;
+        return ProductMapper.PRODUCT_MAPPER.toResponse(res);
     }
 
     @Override
     public List<ProductResponseDto> getAll() {
-        log.info("get all products");
-        return list;
+
+        return productRepository.findAll().stream().map((e)->
+                        ProductMapper.PRODUCT_MAPPER.toResponse(e))
+                .collect(Collectors.toList());
     }
 
     @Override
     public ProductResponseDto getById(Long id) {
-        log.info("getById product");
 
-        for (ProductResponseDto product : list) {
-            if (product.getId().equals(id)) {
-                return product;
-            }
-        }
-        return null;
+       Product product= fetchProduct(id);
+        return ProductMapper.PRODUCT_MAPPER.toResponse(product);
     }
 
     @Override
     public void delete(Long id) {
-        log.info("delete product");
-
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getId().equals(id)) {
-                list.remove(i);
-                break;
-            }
-        }
+        Product product= fetchProduct(id);
+        product.setProductStatus(ProductStatus.DELETED);
+        productRepository.save(product);
     }
 
     @Override
     public ProductResponseDto getByName(String name) {
-        log.info("getByName product");
-
-        for (ProductResponseDto product : list) {
-            if (product.getName().equalsIgnoreCase(name)) {
-                return product;
-            }
-        }
-        return null;
+      Product product= productRepository.getProductByName(name);
+      return ProductMapper.PRODUCT_MAPPER.toResponse(product);
     }
 }

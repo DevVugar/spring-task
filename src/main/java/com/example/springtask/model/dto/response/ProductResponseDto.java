@@ -1,8 +1,10 @@
 package com.example.springtask.model.dto.response;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class ProductResponseDto {
     private Long id;
 
@@ -10,5 +12,5 @@ public class ProductResponseDto {
 
     private String description;
 
-    private double cost;
+    private double price;
 }
