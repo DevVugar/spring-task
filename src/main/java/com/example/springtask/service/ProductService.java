@@ -15,4 +15,8 @@ public interface ProductService {
     void delete(Long id);
 
     ProductResponseDto getByName(String name);
+
+    ProductResponseDto updateName(Long id,String name);
+
+    ProductResponseDto updateName2(Long id, String name);
 }

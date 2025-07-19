@@ -14,4 +14,6 @@ public class ProductRequestDto {
     private String description;
 
     private double price;
+
+    private Long categoryId;
 }

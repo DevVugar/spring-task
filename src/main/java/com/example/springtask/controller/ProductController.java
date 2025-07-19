@@ -3,6 +3,8 @@ package com.example.springtask.controller;
 
 import com.example.springtask.model.dto.requset.ProductRequestDto;
 import com.example.springtask.model.dto.response.ProductResponseDto;
+import com.example.springtask.model.entity.Product;
+import com.example.springtask.repository.ProductRepository;
 import com.example.springtask.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,14 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final ProductRepository productRepository;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService,
+                             ProductRepository productRepository) {
         this.productService = productService;
+        this.productRepository = productRepository;
     }
+
 
 
 
@@ -50,6 +56,16 @@ public class ProductController {
     ResponseEntity<Void> delete(@PathVariable Long id) {
         productService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/{id}/updateName")
+    ResponseEntity<ProductResponseDto> updateName(@PathVariable Long id, @RequestParam String name) {
+        return new ResponseEntity<>(productService.updateName(id,name), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}/updateName2")
+    ResponseEntity<ProductResponseDto> updateName2(@PathVariable Long id, @RequestParam String name) {
+        return new ResponseEntity<>(productService.updateName2(id,name), HttpStatus.OK);
     }
 
 

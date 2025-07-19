@@ -28,8 +28,8 @@ public class Product {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    private ProductStatus productStatus;
-
+    private ProductStatus productStatus=ProductStatus.ACTIVE;
+ 
     private double price;
 
     private int stock;
