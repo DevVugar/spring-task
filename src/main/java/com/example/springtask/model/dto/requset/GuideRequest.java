@@ -1,11 +1,15 @@
 package com.example.springtask.model.dto.requset;
 
+
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class CategoryRequestDto {
+@Builder
+public class GuideRequest {
     private Long id;
     private String name;
-    private String description;
-    private Long categoryId;
+    private String email;
+    private String phoneNumber;
+
 }

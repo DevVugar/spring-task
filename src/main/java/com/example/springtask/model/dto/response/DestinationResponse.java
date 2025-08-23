@@ -1,16 +1,17 @@
 package com.example.springtask.model.dto.response;
 
-import lombok.Builder;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
-@Builder
-public class ProductResponseDto {
+public class DestinationResponse {
+
     private Long id;
 
-    private String name;
+    private String location;
 
     private String description;
 
-    private double price;
+    private Date visitDate;
 }

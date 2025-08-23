@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: Create categories table
+      id: Create Destination table
       author: Vugar
       changes:
         - createTable:
-            tableName: categories
+            tableName: destinations
             columns:
               - column:
                   name: id
@@ -14,5 +14,10 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: name
+                  name: location
                   type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+
+
